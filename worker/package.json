@@ -1,0 +1,13 @@
+{
+    "@comment dependencies": [
+        "nodemon is used as to do hot deploys"
+    ],
+    "dependencies": {
+        "nodemon": "1.18.3",
+        "redis": "2.8.0"
+    },
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon"
+    }
+}
