@@ -1,0 +1,19 @@
+{
+    "@comment dependencies": [
+        "express is the server framework",
+        "pg is the postgres client",
+        "nodemon is used as to do hot deploys"
+    ],
+    "dependencies": {
+        "express": "4.16.3",
+        "pg": "7.4.3",
+        "redis": "2.8.0",
+        "cors": "2.8.4",
+        "body-parser": "*",
+        "nodemon": "1.18.3"
+    },
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon"
+    }
+}
