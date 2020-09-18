@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 // axios is used to do HTTP requests
 import axios from 'axios';
 
@@ -23,7 +23,7 @@ class Fib extends Component {
 
     async fetchIndexes() {
         // calls API and retrieves all indexes previously requested
-        const indexes = await axios.get('/api/values/all');
+        const seenIndexes = await axios.get('/api/values/all');
         // set index retrieved via API to this class
         this.setState({
             seenIndexes: seenIndexes.data
@@ -61,23 +61,25 @@ class Fib extends Component {
     }
 
     render() {
-        <div>
-            <form onSubmit={this.handleSubmit}>
-                <label>Enter your fibonacci index:</label>
-                <input
-                    // event handler sets this.value if input field is changed
-                    value={this.state.index}
-                    onChange={event => this.setState({ index: event.target.value })}
-                />
-                <button>Submit</button>
-            </form>
+        return(
+            <div>
+                <form onSubmit={this.handleSubmit}>
+                    <label>Enter your fibonacci index:</label>
+                    <input
+                        // event handler sets this.value if input field is changed
+                        value={this.state.index}
+                        onChange={event => this.setState({ index: event.target.value })}
+                    />
+                    <button>Submit</button>
+                </form>
 
-            <h3>Indexes seen before:</h3>
-            {this.renderSeenIndexes()}
+                <h3>Indexes seen before:</h3>
+                {this.renderSeenIndexes()}
 
-            <h3>Values calculated before:</h3>
-            {this.renderValues()}
-        </div>
+                <h3>Values calculated before:</h3>
+                {this.renderValues()}
+            </div>
+        );
     }
 }
 
