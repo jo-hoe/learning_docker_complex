@@ -92,5 +92,5 @@ app.post('/values/input', async(req,res) => {
 Express port listening
 ************************************************/
 app.listen(listeningPort, err => {
-    console.log('Listening on port' + listeningPort);
+    console.log('Listening on port ' + listeningPort);
 });
