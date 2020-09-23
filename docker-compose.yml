@@ -3,7 +3,13 @@ services:
   postgres:
     image: "postgres:latest"
     environment: 
-      - POSTGRES_PASSWORD # value will be via "docker-compose up" call
+      - POSTGRES_PASSWORD=postgres_password
+      # you can also leave the value empty like so
+      # - POSTGRES_PASSWORD
+      # this allows you to inject the parameter while starting docker compose
+      # $env:POSTGRES_PASSWORD="mypassword";docker-compose up
+      # to follow the example the password will be hardcoded.
+      # Note that Postgres can still be isolated in the container
   redis:
     image: "redis:latest"
   server:
@@ -13,3 +19,26 @@ services:
     volumes:
       - /app/node_modules # avoids that inside the container, this folder is overridden
       - ./server:/app     # all accessed file will be retrieved from "./server" folder
+    environment:
+      - REDIS_HOST=redis # we refer to just redis here as this is the hostname within the container
+      - REDIS_PORT=6379
+      - PGUSER=postgres
+      - PGHOST=postgres
+      - PGDATABASE=postgres
+      - PGPASSWORD=postgres_password
+      - PGPORT=5432
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+        - /app/node_modules
+        - ./client:/app
+  worker:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./worker
+    volumes:
+        - /app/node_modules
+        - ./worker:/app
+
